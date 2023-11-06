@@ -1,17 +1,16 @@
 [[change-data-capture]]
-:description: This page describes how use Change Data Capture API.
+:description: This page describes how use the Change Data Capture (CDC) API.
 = Use Change Data Capture
 
-link:https://neo4j.com/docs/cdc/current/[Change Data Capture] (CDC) queries can be created with the Cypher Builder by using the Procedures in the `cdc` namespace:
+This page describes how to create link:https://neo4j.com/docs/cdc/current/[Change Data Capture] (CDC) queries with the Cypher Builder using the following procedures in the `cdc` namespace:
 
 * `Cypher.cdc.current()`
 * `Cypher.cdc.earliest()`
 * `Cypher.cdc.query(from, selectors)`
 
+== Current change identifier
 
-== Examples
-
-=== Acquiring the current change identifier
+To acquire the current change identifier, follow these instructions:
 
 [source, javascript]
 ----
@@ -19,14 +18,14 @@ const query = Cypher.cdc.current().yield("id");
 const { cypher } = query.build();
 ----
 
-
 [source, cypher]
 ----
 CALL cdc.current() YIELD id
 ----
 
+== Query changes
 
-=== Querying changes
+To query changes in the graph, follow these instructions:
 
 [source, javascript]
 ----
@@ -39,10 +38,9 @@ const { cypher } = query.build();
 CALL cdc.query("cdc-id", [])
 ----
 
+== Using query selectors
 
-=== Using query selectors
-
-To use link:https://neo4j.com/docs/cdc/current/selectors/[CDC selectors] you'll need to define a `Map` with the properties of the selector schema for each selector:
+To use link:https://neo4j.com/docs/cdc/current/selectors/[CDC selectors], define a `Map` with the properties of the selector schema for each selector:
 
 [source, javascript]
 ----
